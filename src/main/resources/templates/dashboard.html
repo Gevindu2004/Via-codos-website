@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+<div class="dashboard-container">
+    <div class="section dashboard-card" id="blogs-news">
+        <div class="section-title">Blogs & News</div>
+        <p>Stay updated with the latest blogs and news from Viacodos.</p>
+        <!-- Blog/news items can be dynamically added here -->
+    </div>
+    <div class="section dashboard-card" id="projects" style="cursor:pointer;" onclick="window.location.href='/projects'">
+        <div class="section-title">Our Projects</div>
+        <p>Explore our innovative projects and case studies.</p>
+        <!-- Project items can be dynamically added here -->
+    </div>
+    <div class="section" id="services">
+        <div class="section-title">Services</div>
+        <div class="services-list">
+            <div class="service-card web-development">
+                <div class="service-title">Web Development</div>
+                <div class="service-desc">Modern, responsive websites and web apps.</div>
+            </div>
+            <div class="service-card mobile-apps">
+                <div class="service-title">Mobile Apps</div>
+                <div class="service-desc">Cross-platform mobile solutions for your business.</div>
+            </div>
+        </div>
+
+    </div>
+    <div class="section dashboard-card" id="about-us" style="cursor:pointer;" onclick="window.location.href='/about-us'">
+        <div class="section-title">About Us</div>
+        <p>Learn more about Viacodos, our mission, and our team.</p>
+    </div>
+    <div class="section dashboard-card" id="contact-us" style="cursor:pointer;" onclick="window.location.href='/contact'">
+        <div class="section-title">Contact Us</div>
+        <div class="contact-info">
+            <p>Have questions or want to work with us? Reach out any time!</p>
+        </div>
+    </div>
+</div>
+</body>
+</html> 

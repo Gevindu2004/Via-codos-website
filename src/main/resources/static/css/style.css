@@ -1,0 +1,207 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative; /* Needed for the pseudo-element */
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for text readability */
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: url('/images/pexels-technobulka-10816120.jpg') center/cover no-repeat;
+    filter: blur(3px);
+    z-index: -1;
+}
+
+.welcome-container {
+    text-align: center;
+    color: white;
+    z-index: 10;
+}
+
+.welcome-title {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    animation: float 3s ease-in-out infinite;
+    background: linear-gradient(45deg, #fff, #f0f0f0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.welcome-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 3rem;
+    opacity: 0.9;
+    font-weight: 300;
+    animation: fadeInUp 1s ease-out 0.5s both;
+}
+
+.explore-btn {
+    background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    animation: fadeInUp 1s ease-out 1s both;
+    position: relative;
+    overflow: hidden;
+}
+
+.explore-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(45deg, #ee5a24, #ff6b6b);
+}
+
+.explore-btn:active {
+    transform: translateY(-1px);
+}
+
+.explore-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.explore-btn:hover::before {
+    left: 100%;
+}
+
+/* Floating animation */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Fade in animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.image-container {
+    display: none;
+}
+
+/* Ripple effect for button */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(0);
+    animation: ripple-animation 0.6s linear;
+    pointer-events: none;
+}
+
+@keyframes ripple-animation {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .welcome-title {
+        font-size: 2.5rem;
+    }
+    
+    .welcome-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .explore-btn {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+} 
+
+.image-container {
+    margin-top: 3rem;
+    perspective: 1000px;
+}
+
+.blurry-code-image {
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    filter: blur(2px);
+    transition: filter 0.3s ease, transform 0.3s ease;
+    transform: rotateY(-10deg) rotateX(5deg);
+}
+
+.blurry-code-image:hover {
+    filter: blur(0);
+    transform: rotateY(0deg) rotateX(0deg);
+}
+
+.dashboard-card {
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    border-radius: 12px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+    padding: 28px 24px;
+    margin-bottom: 32px;
+    max-width: 100%;
+    text-align: center;
+    transition: transform 0.3s;
+}
+.dashboard-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.14);
+}
+
+.logo-float {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 18px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.logo-circle {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.18);
+    background: #fff;
+    border: 4px solid #fff;
+} 

@@ -1,0 +1,242 @@
+/* Dashboard-specific styles */
+.dashboard-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 30px;
+    background: rgba(255,255,255,0.65); /* semi-transparent white */
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    max-height: 90vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #ff9800 #2d2d2d;
+    backdrop-filter: blur(6px);
+}
+.section {
+    margin-bottom: 40px;
+}
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 18px;
+    color: #222;
+    font-weight: 700;
+}
+.dashboard-card {
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    border-radius: 12px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+    padding: 28px 24px;
+    margin-bottom: 32px;
+    max-width: 100%;
+    text-align: center;
+    transition: transform 0.3s;
+}
+.dashboard-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.14);
+}
+.services-list {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.service-card {
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    border-radius: 12px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+    padding: 28px 24px;
+    flex: 1 1 220px;
+    min-width: 220px;
+    max-width: 300px;
+    text-align: center;
+    margin-bottom: 16px;
+    animation: float 3s ease-in-out infinite;
+    transition: transform 0.3s;
+}
+.service-card:hover {
+    transform: translateY(-12px) scale(1.04);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+}
+.service-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.service-desc {
+    font-size: 1rem;
+    color: #444;
+}
+.service-card.web-development {
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+}
+.service-card.web-development::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/images/fotis-fotopoulos-LJ9KY8pIH3E-unsplash.jpg') center/cover no-repeat;
+    filter: blur(4px);
+    filter: brightness(0.7);
+    z-index: 0;
+    border-radius: 12px;
+}
+.service-card.web-development > * {
+    position: relative;
+    z-index: 1;
+    color: #fff;
+}
+.service-card.mobile-apps {
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+}
+.service-card.mobile-apps::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/images/ChatGPT Image Jun 23, 2025, 01_51_19 PM.png') center/cover no-repeat;
+    filter: blur(2px) brightness(0.7);
+    z-index: 0;
+    border-radius: 12px;
+}
+.service-card.mobile-apps > * {
+    position: relative;
+    z-index: 1;
+    color: #fff;
+}
+@media (max-width: 900px) {
+    .services-list {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+#blogs-news {
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+}
+#blogs-news::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/images/pexels-sasha-kim-9414330.jpg') center/cover no-repeat;
+    filter: brightness(0.7);
+    z-index: 0;
+}
+#blogs-news > * {
+    position: relative;
+    z-index: 1;
+}
+#blogs-news .section-title {
+    color: #fff;
+}
+#about-us.dashboard-card {
+    background: linear-gradient(135deg, #f9cfa7 0%, #fcb69f 100%);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+#about-us.dashboard-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/images/ChatGPT Image Jun 23, 2025, 02_10_54 PM.png') center/cover no-repeat;
+    filter: blur(4px) brightness(0.7);
+    z-index: 0;
+    border-radius: 12px;
+}
+#about-us.dashboard-card > * {
+    position: relative;
+    z-index: 1;
+    color: #fff;
+}
+#about-us.dashboard-card .section-title {
+    color: #fff;
+}
+#projects {
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+}
+#projects::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/images/pexels-yankrukov-7793162.jpg') center/cover no-repeat;
+    filter:blur(2px) brightness(0.7);
+    z-index: 0;
+}
+#projects > * {
+    position: relative;
+    z-index: 1;
+}
+#projects .section-title {
+    color: #fff;
+}
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+}
+/* Custom scrollbar for Webkit browsers */
+.dashboard-container::-webkit-scrollbar {
+    width: 12px;
+    background: #2d2d2d;
+}
+.dashboard-container::-webkit-scrollbar-thumb {
+    background: #ff9800;
+    border-radius: 6px;
+}
+.dashboard-container::-webkit-scrollbar-thumb:hover {
+    background: #ffa726;
+}
+#contact-us.dashboard-card {
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+}
+#contact-us.dashboard-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/images/michal-biernat-h0xEUQXzU38-unsplash.jpg') center/cover no-repeat;
+    filter: blur(4px) brightness(0.7);
+    z-index: 0;
+    border-radius: 12px;
+}
+#contact-us.dashboard-card > * {
+    position: relative;
+    z-index: 1;
+    color: #fff;
+}
+#contact-us.dashboard-card .section-title {
+    color: #fff;
+} 

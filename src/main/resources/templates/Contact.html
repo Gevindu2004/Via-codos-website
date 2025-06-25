@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Viacodos</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        body {
+            background: url('/images/fotis-fotopoulos-LJ9KY8pIH3E-unsplash.jpg') center/cover no-repeat fixed;
+            min-height: 100vh;
+            margin: 0;
+            color: #fff;
+        }
+        .contact-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            width: 100vw;
+        }
+        .contact-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 8px #222;
+        }
+        .contact-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            text-shadow: 1px 1px 6px #222;
+        }
+        .contact-form {
+            background: rgba(0,0,0,0.7);
+            border-radius: 16px;
+            padding: 2rem 2.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+        }
+        .contact-form label {
+            align-self: flex-start;
+            margin-bottom: 0.3rem;
+            font-size: 1.1rem;
+            color: #fff;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.7rem;
+            margin-bottom: 1.2rem;
+            border-radius: 8px;
+            border: none;
+            font-size: 1rem;
+            background: #fff;
+            color: #222;
+            resize: none;
+        }
+        .contact-form button {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: #fff;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        .contact-form button:hover {
+            background: linear-gradient(45deg, #ee5a24, #ff6b6b);
+        }
+        .company-info {
+            background: rgba(0,0,0,0.8);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            color: #fff;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+            text-align: center;
+            margin-top: 1rem;
+        }
+        .company-info h2 {
+            font-size: 1.3rem;
+            margin-bottom: 0.7rem;
+        }
+        #popupMessage {
+            display:none;
+            background: #4caf50;
+            color: #fff;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            text-align: center;
+            font-weight: bold;
+        }
+        @media (max-width: 600px) {
+            .contact-form, .company-info {
+                padding: 1rem;
+            }
+            .contact-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="contact-container">
+    <div class="contact-title">Contact Us</div>
+    <div class="contact-subtitle">We'd love to hear from you! Fill out the form below or reach us at our company info.</div>
+    <form id="contactForm" class="contact-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+        <button class="explore-btn" type="submit">Send Message</button>
+    </form>
+    <div id="popupMessage">Message successfully sent!</div>
+    <div class="company-info">
+        <h2>Company Info</h2>
+        <p>Email: viacodos@gmail.com</p>
+        <p>Phone: +94769047552</p>
+    </div>
+</div>
+<script>
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const data = {
+        name: form.name.value,
+        email: form.email.value,
+        message: form.message.value
+    };
+    const response = await fetch('/send-contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    });
+    if (response.ok) {
+        document.getElementById('popupMessage').style.display = 'block';
+        form.reset();
+    } else {
+        alert('Failed to send message. Please try again.');
+    }
+});
+</script>
+</body>
+</html> 
