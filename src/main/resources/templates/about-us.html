@@ -50,6 +50,9 @@
         <div class="about-text">
             <strong>Contact us:</strong> viacodos@gmail.com
         </div>
+        <div th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+            <!-- Edit and Delete buttons -->
+        </div>
     </div>
 </body>
 </html> 

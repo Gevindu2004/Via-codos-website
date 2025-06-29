@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${project.id != null ? 'Edit Project' : 'Add New Project'} + ' - Viacodos Admin'">Project Form - Viacodos Admin</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="admin-container">
+        <nav class="admin-nav">
+            <div class="nav-brand">
+                <h2>Viacodos Admin</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/admin/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="/admin/projects"><i class="fas fa-project-diagram"></i> Projects</a></li>
+                <li><a href="/"><i class="fas fa-home"></i> View Site</a></li>
+                <li>
+                    <form th:action="@{/logout}" method="post" style="display: inline;">
+                        <button type="submit" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+
+        <main class="admin-main">
+            <div class="page-header">
+                <h1 th:text="${project.id != null ? 'Edit Project' : 'Add New Project'}">Project Form</h1>
+                <a href="/admin/projects" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to Projects
+                </a>
+            </div>
+
+            <div class="form-container">
+                <form th:action="${project.id != null ? '/admin/projects/' + project.id : '/admin/projects'}" 
+                      th:object="${project}" method="post" class="project-form" enctype="multipart/form-data">
+                    
+                    <div class="form-group">
+                        <label for="title">Project Title *</label>
+                        <input type="text" id="title" th:field="*{title}" required 
+                               placeholder="Enter project title">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" th:field="*{description}" rows="4" 
+                                  placeholder="Enter project description"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="imageFile">Project Image</label>
+                        <input type="file" id="imageFile" name="imageFile" accept="image/png, image/jpeg, image/jpg, image/gif">
+                        <small>Upload a PNG, JPG, or GIF image for the project</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="backupImageUrl">Backup Image URL</label>
+                        <input type="url" id="backupImageUrl" name="backupImageUrl" th:field="*{backupImageUrl}" placeholder="https://example.com/backup-image.jpg">
+                        <small>Optional: Enter a backup image URL to use if no image is uploaded</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="technologies">Technologies</label>
+                        <input type="text" id="technologies" th:field="*{technologies}" 
+                               placeholder="e.g., Java, Spring Boot, HTML, CSS">
+                        <small>Separate technologies with commas</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="githubUrl">GitHub URL</label>
+                        <input type="url" id="githubUrl" th:field="*{githubUrl}" 
+                               placeholder="https://github.com/username/project">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="liveUrl">Live Demo URL</label>
+                        <input type="url" id="liveUrl" th:field="*{liveUrl}" 
+                               placeholder="https://project-demo.com">
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> 
+                            <span th:text="${project.id != null ? 'Update Project' : 'Create Project'}">Save Project</span>
+                        </button>
+                        <a href="/admin/projects" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+</html> 

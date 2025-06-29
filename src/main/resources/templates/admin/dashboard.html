@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Viacodos</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body style="overflow-y: auto; max-height: 100vh;">
+    <div class="admin-container">
+        <nav class="admin-nav">
+            <div class="nav-brand">
+                <h2>Viacodos Admin</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/admin/dashboard" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="/admin/projects"><i class="fas fa-project-diagram"></i> Projects</a></li>
+                <li><a href="/admin/blogs"><i class="fas fa-blog"></i> Blogs & News</a></li>
+                <li><a href="/"><i class="fas fa-home"></i> View Site</a></li>
+                <li>
+                    <form th:action="@{/logout}" method="post" style="display: inline;">
+                        <button type="submit" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+
+        <main class="admin-main">
+            <div class="dashboard-header">
+                <h1>Admin Dashboard</h1>
+                <p>Welcome to the Viacodos administration panel</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 th:text="${#lists.size(projects)}">0</h3>
+                        <p>Total Projects</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Active</h3>
+                        <p>Website Status</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quick-actions">
+                <h2>Quick Actions</h2>
+                <div class="action-buttons">
+                    <a href="/admin/projects/new" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add New Project
+                    </a>
+                    <a href="/admin/projects" class="btn btn-secondary">
+                        <i class="fas fa-list"></i> Manage Projects
+                    </a>
+                </div>
+            </div>
+
+            <div class="recent-projects">
+                <h2>Recent Projects</h2>
+                <div class="projects-grid" th:if="${not #lists.isEmpty(projects)}">
+                    <div class="project-card" th:each="project : ${projects}">
+                        <div class="project-image">
+                            <img th:if="${project.imageUrl}" th:src="${project.imageUrl}" th:alt="${project.title}">
+                            <div th:unless="${project.imageUrl}" class="no-image">
+                                <i class="fas fa-image"></i>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <h3 th:text="${project.title}">Project Title</h3>
+                            <p th:text="${#strings.abbreviate(project.description, 100)}">Project description...</p>
+                            <div class="project-actions">
+                                <a th:href="@{/admin/projects/{id}/edit(id=${project.id})}" class="btn btn-small">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="no-projects" th:if="${#lists.isEmpty(projects)}">
+                    <p>No projects found. <a href="/admin/projects/new">Create your first project</a></p>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html> 

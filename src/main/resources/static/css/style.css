@@ -10,7 +10,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    overflow-y: auto;
     position: relative; /* Needed for the pseudo-element */
     background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for text readability */
 }
@@ -204,4 +204,14 @@ body::before {
     box-shadow: 0 4px 18px rgba(0,0,0,0.18);
     background: #fff;
     border: 4px solid #fff;
+}
+
+.project-image img {
+    display: block;
+    margin: 0 auto 16px auto;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.12);
 } 

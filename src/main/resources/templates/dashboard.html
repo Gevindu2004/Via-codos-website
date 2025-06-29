@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="dashboard-container">
-    <div class="section dashboard-card" id="blogs-news">
+    <div class="section dashboard-card" id="blogs-news" style="cursor:pointer;" onclick="window.location.href='/blogs'">
         <div class="section-title">Blogs & News</div>
         <p>Stay updated with the latest blogs and news from Viacodos.</p>
         <!-- Blog/news items can be dynamically added here -->
@@ -44,5 +44,10 @@
         </div>
     </div>
 </div>
+<script>
+function explore() {
+    window.location.href = "/dashboard";
+}
+</script>
 </body>
 </html> 

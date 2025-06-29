@@ -1,17 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Projects - Viacodos</title>
     <link rel="stylesheet" href="/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 <div class="welcome-container">
     <h1 class="welcome-title">Our Projects</h1>
     <p class="welcome-subtitle">Showcasing our completed work and achievements</p>
+    
+    <!-- Admin Actions (only visible to admins) -->
+    <div th:if="${#authorization.expression('hasRole(''ADMIN'')')}" style="text-align: center; margin: 2rem 0;">
+        <a href="/admin/projects/new" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; margin-right: 10px;">
+            <i class="fas fa-plus"></i> Add New Project
+        </a>
+        <a href="/admin/dashboard" style="background: #95a5a6; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px;">
+            <i class="fas fa-cog"></i> Admin Dashboard
+        </a>
+    </div>
+    
     <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; margin-top: 2rem;">
-        <div style="background: rgba(0,0,0,0.6); border-radius: 12px; padding: 2rem; min-width: 250px; max-width: 350px; color: #fff; box-shadow: 0 8px 25px rgba(0,0,0,0.2);">
+        <!-- Database Projects -->
+        <div th:each="project : ${projects}" 
+             style="background: rgba(0,0,0,0.6); border-radius: 12px; padding: 2rem; min-width: 250px; max-width: 350px; color: #fff; box-shadow: 0 8px 25px rgba(0,0,0,0.2);">
+            
+            <!-- Project Image -->
+            <div style="margin-bottom: 1rem; text-align: center;">
+                <img th:if="${project.imageUrl != null and !#strings.isEmpty(project.imageUrl)}" th:src="@{${project.imageUrl}}" th:alt="${project.title}" 
+                     style="max-width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
+                <img th:if="${(project.imageUrl == null or #strings.isEmpty(project.imageUrl)) and project.backupImageUrl != null and !#strings.isEmpty(project.backupImageUrl)}" th:src="@{${project.backupImageUrl}}" th:alt="${project.title}" 
+                     style="max-width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
+                <img th:if="${(project.imageUrl == null or #strings.isEmpty(project.imageUrl)) and (project.backupImageUrl == null or #strings.isEmpty(project.backupImageUrl))}" src="/images/default-placeholder.png" alt="No image available" 
+                     style="max-width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
+            </div>
+            
+            <h2 style="font-size: 1.5rem; margin-bottom: 1rem;" th:text="${project.title}">Project Title</h2>
+            <p th:text="${project.description}">Project description...</p>
+            
+            <!-- Technologies -->
+            <div th:if="${project.technologies}" style="margin: 1rem 0;">
+                <strong>Technologies:</strong>
+                <span th:text="${project.technologies}">Technologies used</span>
+            </div>
+            
+            <!-- Project Links -->
+            <div style="margin-top: 1.5rem; display: flex; gap: 10px; flex-wrap: wrap;">
+                <a th:if="${project.githubUrl}" th:href="${project.githubUrl}" target="_blank"
+                   style="background: #333; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px; font-size: 0.9rem;">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+                <a th:if="${project.liveUrl}" th:href="${project.liveUrl}" target="_blank"
+                   style="background: #667eea; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px; font-size: 0.9rem;">
+                    <i class="fas fa-external-link-alt"></i> Live Demo
+                </a>
+            </div>
+            
+            <!-- Admin Actions -->
+            <div th:if="${#authorization.expression('hasRole(''ADMIN'')')}" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.2);">
+                <a th:href="@{/admin/projects/{id}/edit(id=${project.id})}" 
+                   style="background: #3498db; color: white; padding: 6px 12px; text-decoration: none; border-radius: 3px; font-size: 0.8rem; margin-right: 8px;">
+                    <i class="fas fa-edit"></i> Edit
+                </a>
+                <form th:action="@{/admin/projects/{id}/delete(id=${project.id})}" method="post" style="display: inline;" 
+                      onsubmit="return confirm('Are you sure you want to delete this project?')">
+                    <button type="submit" 
+                            style="background: #e74c3c; color: white; padding: 6px 12px; border: none; border-radius: 3px; font-size: 0.8rem; cursor: pointer;">
+                        <i class="fas fa-trash"></i> Delete
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Default Projects (if no database projects) -->
+        <div th:if="${#lists.isEmpty(projects)}" style="background: rgba(0,0,0,0.6); border-radius: 12px; padding: 2rem; min-width: 250px; max-width: 350px; color: #fff; box-shadow: 0 8px 25px rgba(0,0,0,0.2);">
             <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">Plan Do Calculate App</h2>
             <p>Plando Calculator is an innovative app designed to enhance personal productivity by analyzing fixed workloads, enabling users to track their tasks and manage their time effectively.</p>
             <ul style="margin-left: 1.2em; margin-bottom: 0.7em;">
@@ -23,7 +87,8 @@
             </ul>
             <p>By visually identifying remaining time periods and organizing work to be done, Plando Calculator empowers individuals to optimize their workflow and achieve their goals more efficiently.</p>
         </div>
-        <div style="background: rgba(0,0,0,0.6); border-radius: 12px; padding: 2rem; min-width: 250px; max-width: 350px; color: #fff; box-shadow: 0 8px 25px rgba(0,0,0,0.2);">
+        
+        <div th:if="${#lists.isEmpty(projects)}" style="background: rgba(0,0,0,0.6); border-radius: 12px; padding: 2rem; min-width: 250px; max-width: 350px; color: #fff; box-shadow: 0 8px 25px rgba(0,0,0,0.2);">
             <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">Real time Price Lanka</h2>
             <p>RealTime Price Lanka is a mobile application designed by Via Codos to provide Sri Lankan consumers with net real-time prices of essential goods and services. The app focuses on everyday items such as groceries, chase foods, household products, vegetables, fruits, dairy products, meat, baby products, personal care items, cleaning supplies, fuel, and more. Prices are gathered from major supermarkets, local shops, and online platforms and are updated monthly to reflect changes due to inflation, promotions, or availability.</p>
             <ul style="margin-left: 1.2em; margin-bottom: 0.7em;">
@@ -33,7 +98,8 @@
                 <li>Offline access to last updated data</li>
             </ul>
         </div>
-        <div style="background: rgba(0,0,0,0.6); border-radius: 12px; padding: 2rem; min-width: 250px; max-width: 350px; color: #fff; box-shadow: 0 8px 25px rgba(0,0,0,0.2);">
+        
+        <div th:if="${#lists.isEmpty(projects)}" style="background: rgba(0,0,0,0.6); border-radius: 12px; padding: 2rem; min-width: 250px; max-width: 350px; color: #fff; box-shadow: 0 8px 25px rgba(0,0,0,0.2);">
             <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">Project Gamma</h2>
             <p>Mobile app for fitness tracking with social features and personalized recommendations.</p>
         </div>

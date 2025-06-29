@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Page - Viacodos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .container {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .nav-links a {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        .status {
+            background: rgba(0,255,0,0.2);
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✅ Public Route Test Successful!</h1>
+        
+        <div class="status">
+            <h3>🎉 You can access public routes without authentication!</h3>
+            <p>This confirms that the security configuration is working correctly.</p>
+        </div>
+        
+        <h2>Available Public Routes:</h2>
+        <ul>
+            <li><strong>/</strong> - Home page</li>
+            <li><strong>/dashboard</strong> - Public dashboard</li>
+            <li><strong>/about-us</strong> - About us page</li>
+            <li><strong>/projects</strong> - Projects page</li>
+            <li><strong>/contact</strong> - Contact page</li>
+            <li><strong>/login</strong> - Admin login page</li>
+        </ul>
+        
+        <div class="nav-links">
+            <a href="/">🏠 Go to Home</a>
+            <a href="/projects">📁 Go to Projects</a>
+            <a href="/about-us">ℹ️ Go to About Us</a>
+            <a href="/contact">📞 Go to Contact</a>
+            <a href="/login">🔐 Admin Login</a>
+        </div>
+        
+        <div style="margin-top: 30px; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 5px;">
+            <h3>🔍 Troubleshooting:</h3>
+            <p>If you're still being redirected to admin pages:</p>
+            <ol>
+                <li>Make sure you're accessing <code>http://localhost:8080</code> (not <code>localhost8080</code>)</li>
+                <li>Clear your browser cache and cookies</li>
+                <li>Try opening in an incognito/private window</li>
+                <li>Check the browser's developer console for any errors</li>
+            </ol>
+        </div>
+    </div>
+</body>
+</html> 
